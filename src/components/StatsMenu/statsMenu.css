@@ -1,0 +1,52 @@
+.statsMenu {
+    position: relative;
+    width: 200px;
+}
+.statsMenu_choice {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.statsMenu_average {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.statsMenu_average_text {
+    color: #667985;
+    font-size: 16px;
+}
+.statsMenu_average_value {
+    color: #f38b00;
+    font-size: 48px;
+    font-weight: 700;
+}
+.statsMenu_average_value span {
+    color: #667985;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+
+@media (max-width: 1200px) {
+    .statsMenu {
+        width: 100%;
+    }
+    .statsMenu_choice {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: unset;
+        margin: 20px 0;
+    }
+    .statsMenu_average {
+        position:static;
+        transform: none;
+    }
+}

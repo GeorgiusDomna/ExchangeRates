@@ -5,4 +5,4 @@ export interface ICurrencyData {
   value: number;
 }
 
-type typeCurrency = 'Курс доллара' | 'Курс евро' | 'Курс юаня';
+export type typeCurrency = 'Курс доллара' | 'Курс евро' | 'Курс юаня';

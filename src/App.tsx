@@ -1,21 +1,42 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import Charts from './components/Charts/Charts';
+import StatsMenu from './components/StatsMenu/StatsMenu';
+import { Theme, presetGpnDefault } from '@consta/uikit/Theme';
+
+import { ICurrencyData, typeCurrency } from './interfaces/ICurrencyData';
+
 import { getExchanges } from './api/documentService';
-import { ICurrencyData } from './interfaces/ICurrencyData';
+import { filterByIndicator } from './utils/filterByIndicator';
+
+import './App.css';
+
+const currencies: typeCurrency[] = ['Курс доллара', 'Курс евро', 'Курс юаня'];
 
 function App() {
-  const [currencyList, setCurrencyList] = useState<ICurrencyData[]>([])
+  const [data, setData] = useState<ICurrencyData[]>([]);
+  const [currCurrency, setCurrCurrency] = useState<typeCurrency>(currencies[0]);
 
   useEffect(() => {
     (async () => {
-      const data = await getExchanges();
-      data && setCurrencyList(data);
+      const res = await getExchanges();
+      res && setData(res);
     })();
-  }, [])
+  }, []);
+
+  const datesList = filterByIndicator(data, currCurrency);
 
   return (
-    <div className="App">
-    </div>
-  ) 
+    <Theme className="app" preset={presetGpnDefault}>
+      <Charts data={datesList} currCurrency={currCurrency} />
+      <StatsMenu
+        data={data}
+        currencies={currencies}
+        currCurrency={currCurrency}
+        setCurrCurrency={setCurrCurrency}
+      />
+    </Theme>
+  );
 }
 
 export default App;
